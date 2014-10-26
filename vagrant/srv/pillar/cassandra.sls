@@ -1,5 +1,6 @@
 cassandra:
-  version: 2.0.9
+  version: 2.0.11
+  install_java: True
   config:
     cluster_name: test-cluster
     seeds:

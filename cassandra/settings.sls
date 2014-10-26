@@ -3,7 +3,8 @@
 {% set g  = salt['grains.get']('cassandra', {}) %}
 {% set gc = g.get('config', {}) %}
 
-{% set version        = g.get('version', p.get('version', '2.0.9')) %}
+{% set install_java   = g.get('install_java', p.get('install_java', False)) %}
+{% set version        = g.get('version', p.get('version', '2.0.11')) %}
 {% set series         = g.get('version', p.get('series', '20x')) %}
 {% set package_name   = g.get('package_name', p.get('package_name', 'cassandra')) %}
 {% set conf_path      = g.get('conf_path', p.get('conf_path', '/etc/cassandra/cassandra.yaml')) %}
@@ -39,6 +40,7 @@
 {%- do cassandra.update({
   'version': version,
   'series': series,
+  'install_java': install_java,
   'package_name': package_name,
   'conf_path': conf_path,
   'config': config

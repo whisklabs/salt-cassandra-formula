@@ -1,9 +1,23 @@
 {%- from 'cassandra/settings.sls' import cassandra with context %}
 
+{% if cassandra.install_java %}
+openjdk-7-jre-headless:
+  pkg.installed:
+    - require_in:
+      - pkg: cassandra_package
+{% endif %}
+
+cassandra_repo_key:
+  cmd.run:
+    - name: "apt-key adv --keyserver pgp.mit.edu --recv 2B5C1B00"
+    - unless: apt-key export 2B5C1B00 | grep 'BEGIN PGP'
+    - require_in:
+      - pkgrepo: cassandra_package
+
 cassandra_package:
   pkgrepo.managed:
     - humanname: Cassandra Debian Repo
-    - name: http://www.apache.org/dist/cassandra/debian {{ cassandra.series }} main
+    - name: deb https://www.apache.org/dist/cassandra/debian {{ cassandra.series }} main
     - file: /etc/apt/sources.list.d/cassandra.sources.list
     - keyid: F758CE318D77295D
     - keyserver: pgp.mit.edu
