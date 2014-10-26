@@ -2,10 +2,11 @@
 
 cassandra_package:
   pkgrepo.managed:
-    - humanname: Datastax Debian Repo
-    - name: deb http://debian.datastax.com/community stable main
+    - humanname: Cassandra Debian Repo
+    - name: http://www.apache.org/dist/cassandra/debian {{ cassandra.series }} main
     - file: /etc/apt/sources.list.d/cassandra.sources.list
-    - key_url: http://debian.datastax.com/debian/repo_key
+    - keyid: F758CE318D77295D
+    - keyserver: pgp.mit.edu
   pkg.installed:
     - name: {{ cassandra.package_name }}
     - version: {{ cassandra.version }}

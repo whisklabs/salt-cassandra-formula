@@ -4,6 +4,7 @@
 {% set gc = g.get('config', {}) %}
 
 {% set version        = g.get('version', p.get('version', '2.0.9')) %}
+{% set series         = g.get('version', p.get('series', '20x')) %}
 {% set package_name   = g.get('package_name', p.get('package_name', 'cassandra')) %}
 {% set conf_path      = g.get('conf_path', p.get('conf_path', '/etc/cassandra/cassandra.yaml')) %}
 {% set auto_discovery = g.get('auto_discovery', p.get('auto_discovery', False)) %}
@@ -37,6 +38,7 @@
 
 {%- do cassandra.update({
   'version': version,
+  'series': series,
   'package_name': package_name,
   'conf_path': conf_path,
   'config': config
