@@ -31,7 +31,7 @@ cassandra_configuration:
     - user: root
     - group: root
     - mode: 644
-    - source: salt://cassandra/conf/cassandra.yaml
+    - source: salt://cassandra/conf/cassandra_{{ cassandra.series }}.yaml
     - template: jinja
 
 {% for d in cassandra.config.data_file_directories %}
