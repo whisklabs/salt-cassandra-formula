@@ -19,7 +19,7 @@ cassandra_package:
     - humanname: Cassandra Debian Repo
     - name: deb https://www.apache.org/dist/cassandra/debian {{ cassandra.series }} main
     - file: /etc/apt/sources.list.d/cassandra.sources.list
-    - keyid: F758CE318D77295D
+    - keyid: 749D6EEC0353B12C
     - keyserver: pgp.mit.edu
   pkg.installed:
     - name: {{ cassandra.package_name }}
