@@ -7,20 +7,12 @@ openjdk-7-jre-headless:
       - pkg: cassandra_package
 {% endif %}
 
-cassandra_repo_key:
-  cmd.run:
-    - name: "apt-key adv --keyserver pgp.mit.edu --recv 2B5C1B00"
-    - unless: apt-key export 2B5C1B00 | grep 'BEGIN PGP'
-    - require_in:
-      - pkgrepo: cassandra_package
-
 cassandra_package:
   pkgrepo.managed:
     - humanname: Cassandra Debian Repo
-    - name: deb https://www.apache.org/dist/cassandra/debian {{ cassandra.series }} main
+    - name: deb http://debian.datastax.com/community stable main
     - file: /etc/apt/sources.list.d/cassandra.sources.list
-    - keyid: 749D6EEC0353B12C
-    - keyserver: pgp.mit.edu
+    - key_url: http://debian.datastax.com/debian/repo_key
   pkg.installed:
     - name: {{ cassandra.package_name }}
     - version: {{ cassandra.version }}
@@ -33,6 +25,8 @@ cassandra_configuration:
     - mode: 644
     - source: salt://cassandra/conf/cassandra_{{ cassandra.series }}.yaml
     - template: jinja
+    - require:
+      - pkg: cassandra_package
 
 {% for d in cassandra.config.data_file_directories %}
 data_file_directories_{{ d }}:
@@ -65,4 +59,5 @@ cassandra_service:
     - name: cassandra
     - enable: True
     - watch:
+      - pkg: cassandra_package
       - file: cassandra_configuration
