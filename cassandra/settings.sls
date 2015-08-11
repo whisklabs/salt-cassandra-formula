@@ -4,8 +4,8 @@
 {% set gc = g.get('config', {}) %}
 
 {% set install_java   = g.get('install_java', p.get('install_java', False)) %}
-{% set version        = g.get('version', p.get('version', '2.0.11')) %}
-{% set series         = g.get('version', p.get('series', '20x')) %}
+{% set version        = g.get('version', p.get('version', '2.1.8')) %}
+{% set series         = g.get('version', p.get('series', '21x')) %}
 {% set package_name   = g.get('package_name', p.get('package_name', 'cassandra')) %}
 {% set conf_path      = g.get('conf_path', p.get('conf_path', '/etc/cassandra/cassandra.yaml')) %}
 {% set auto_discovery = g.get('auto_discovery', p.get('auto_discovery', False)) %}

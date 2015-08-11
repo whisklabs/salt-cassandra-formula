@@ -1,5 +1,5 @@
 cassandra:
-  version: 2.1.3
+  version: 2.1.8
   series: 21x
   install_java: True
   config:

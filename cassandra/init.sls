@@ -1,7 +1,7 @@
 {%- from 'cassandra/settings.sls' import cassandra with context %}
 
 {% if cassandra.install_java %}
-openjdk-7-jre-headless:
+openjdk-8-jre-headless:
   pkg.installed:
     - require_in:
       - pkg: cassandra_package

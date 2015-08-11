@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   minion_ips = num_minion.times.collect { |n| minion_ip_base + "#{n+2}" }
   minion_ips_str = minion_ips.join(",")
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "debian/jessie64"
 
   config.vm.provider :virtualbox do |v|
     # On VirtualBox, we don't have guest additions or a functional vboxsf
